@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 300px;
+        height: 300px;
+        margin: 5px;
+        border: 1px solid gainsboro;
+      }
+      .special {
+        background-color: bisque;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box special"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+      const special = document.querySelector(".special");
+      const handleClick = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const { clientX, clientY, pageX, pageY } = e;
+        console.log(rect);
+        console.log(`page : ${pageX} ${pageY}`);
+        console.log(`client : ${clientX} ${clientY}`);
+      };
+      special.addEventListener("click", handleClick);
+    </script>
+  </body>
+</html>
