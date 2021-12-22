@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 300px;
+        height: 300px;
+        margin: 5px;
+        border: 1px solid gainsboro;
+      }
+      .special {
+        background-color: bisque;
+      }
+      .btn--wrapper {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="btn--wrapper">
+      <button class="by">Scroll by 100px(y)</button>
+      <button class="to">Scroll to 100px(y)</button>
+      <button class="into">Scroll into special</button>
+    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box special"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+      const byBtn = document.querySelector(".by");
+      const toBtn = document.querySelector(".to");
+      const intoBtn = document.querySelector(".into");
+      const special = document.querySelector(".special");
+      const scrollBy100px = () => {
+        window.scrollBy({
+          top: 100,
+          left: 0,
+          behavior: "smooth",
+        });
+      };
+      const scrollTo100px = () => {
+        window.scrollTo({
+          top: 100,
+          left: 0,
+          behavior: "smooth",
+        });
+      };
+      const scrollIntoSpecial = () => {
+        special.scrollIntoView({
+          behavior: "smooth",
+        });
+      };
+      byBtn.addEventListener("click", scrollBy100px);
+      toBtn.addEventListener("click", scrollTo100px);
+      intoBtn.addEventListener("click", scrollIntoSpecial);
+    </script>
+  </body>
+</html>
