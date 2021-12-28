@@ -1,0 +1,141 @@
+:root {
+  --border-radius: 10px;
+  --color-grey: #ced3df;
+  --color-pink: #e8c0d4;
+  --color-blue: #84bcf2;
+  --height-normal: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+#app {
+  margin: auto;
+  height: 600px;
+  width: 400px;
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  background-color: #f1f0f7;
+  box-shadow: 2px 2px 2px grey;
+}
+
+.lists {
+  flex: 1;
+  padding: 10px 20px;
+  font-size: 20px;
+  overflow: scroll;
+}
+.list {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.button:hover {
+  transform: scale(1.1) rotate(0.01turn);
+}
+
+.btn--add {
+  width: var(--height-normal);
+  height: var(--height-normal);
+}
+.btn--delete {
+  width: 20px;
+  height: 20px;
+}
+
+.bezel {
+  height: 50px;
+  width: 100%;
+  color: white;
+  background: linear-gradient(
+    to bottom right,
+    var(--color-pink),
+    var(--color-blue)
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--height-normal);
+}
+
+.input {
+  outline: none;
+  border: none;
+  height: var(--height-normal);
+  width: 100%;
+  padding: 0 10px;
+}
+
+.top {
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+.bottom {
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.alerts {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+
+.alert {
+  width: 150px;
+  height: 50px;
+  background: linear-gradient(
+    to bottom right,
+    var(--color-pink),
+    var(--color-blue)
+  );
+  color: white;
+  margin: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  z-index: 1;
+  box-shadow: 2px 2px 2px grey;
+}
+
+.alert.active {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 1.5s;
+}
+
+@keyframes fadein {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+}
