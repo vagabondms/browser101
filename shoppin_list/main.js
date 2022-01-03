@@ -12,7 +12,7 @@ const asyncAlert = async (node) => {
       res(node);
     }, 2000);
   });
-  console.log(promise);
+
   const resolved = await promise;
 
   alerts.removeChild(resolved);
@@ -43,9 +43,8 @@ const createList = (inputValue) => {
 
   newList.setAttribute("class", "list");
   bin.setAttribute("class", "button btn--delete fas fa-trash");
-  bin.addEventListener("click", (e) => {
-    const targetList = e.target.parentNode;
-    lists.removeChild(targetList);
+  bin.addEventListener("click", () => {
+    lists.removeChild(newList);
   });
 
   newList.innerText = inputValue;
@@ -77,4 +76,5 @@ addBtn.addEventListener("click", (e) => {
   const inputValue = getInputValue();
   addToLists(inputValue);
   deleteInputValue();
+  input.focus();
 });
