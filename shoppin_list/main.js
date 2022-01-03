@@ -43,9 +43,9 @@ const createList = (inputValue) => {
 
   newList.setAttribute("class", "list");
   bin.setAttribute("class", "button btn--delete fas fa-trash");
-  bin.addEventListener("click", () => {
-    lists.removeChild(newList);
-  });
+  // bin.addEventListener("click", () => {
+  //   lists.removeChild(newList);
+  // });
 
   newList.innerText = inputValue;
   newList.appendChild(bin);
@@ -78,4 +78,11 @@ addBtn.addEventListener("click", (e) => {
   addToLists(inputValue);
   deleteInputValue();
   input.focus();
+});
+
+lists.addEventListener("click", (e) => {
+  const target = e.target;
+  if (target.classList.contains("btn--delete")) {
+    lists.removeChild(target.parentElement);
+  }
 });
