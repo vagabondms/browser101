@@ -18,10 +18,15 @@ const asyncAlert = async (node) => {
   alerts.removeChild(resolved);
 };
 
-const activateAlert = () => {
+const createAlert = () => {
   const newAlert = document.createElement("div");
   newAlert.setAttribute("class", "alert");
   newAlert.innerText = "추가되었습니다.";
+  return newAlert;
+};
+
+const activateAlert = () => {
+  const newAlert = createAlert();
   alerts.append(newAlert);
   asyncAlert(newAlert);
 };
@@ -32,12 +37,8 @@ const deleteInputValue = () => {
   input.value = "";
 };
 
-const addToLists = (item) => {
-  if (!item) {
-    return;
-  }
+const createList = (inputValue) => {
   const newList = document.createElement("div");
-
   const bin = document.createElement("i");
 
   newList.setAttribute("class", "list");
@@ -46,8 +47,17 @@ const addToLists = (item) => {
     const targetList = e.target.parentNode;
     lists.removeChild(targetList);
   });
-  newList.innerText = item;
+
+  newList.innerText = inputValue;
   newList.appendChild(bin);
+  return newList;
+};
+
+const addToLists = (inputValue) => {
+  if (!inputValue) {
+    return;
+  }
+  const newList = createList(inputValue);
   lists.appendChild(newList);
   activateAlert();
 };
@@ -56,13 +66,15 @@ input.addEventListener("keypress", (e) => {
   const { key } = e;
 
   if (key === "Enter") {
-    addToLists(getInputValue());
+    const inputValue = getInputValue();
+    addToLists(inputValue);
     deleteInputValue();
     return;
   }
 });
 
 addBtn.addEventListener("click", (e) => {
-  addToLists(getInputValue());
+  const inputValue = getInputValue();
+  addToLists(inputValue);
   deleteInputValue();
 });
