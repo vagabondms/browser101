@@ -58,6 +58,7 @@ const addToLists = (inputValue) => {
   }
   const newList = createList(inputValue);
   lists.appendChild(newList);
+  newList.scrollIntoView();
   activateAlert();
 };
 
