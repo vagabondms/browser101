@@ -3,7 +3,6 @@ const addBtn = document.querySelector(".btn--add");
 const deleteBtn = document.querySelector(".btn--delete");
 const lists = document.querySelector(".lists");
 const alerts = document.querySelector(".alerts");
-const activate = document.querySelector(".activate");
 
 const asyncAlert = async (node) => {
   node.classList.add("active");
