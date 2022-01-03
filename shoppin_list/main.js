@@ -5,7 +5,7 @@ const lists = document.querySelector(".lists");
 const alerts = document.querySelector(".alerts");
 const activate = document.querySelector(".activate");
 
-const asyncAlert = (node) => {
+const asyncAlert = async (node) => {
   node.classList.add("active");
   const promise = new Promise((res) => {
     setTimeout(() => {
@@ -13,17 +13,18 @@ const asyncAlert = (node) => {
       res(node);
     }, 2000);
   });
-  promise.then((node) => {
-    alerts.removeChild(node);
-  });
+  console.log(promise);
+  const resolved = await promise;
+
+  alerts.removeChild(resolved);
 };
 
 const activateAlert = () => {
-  const div = document.createElement("div");
-  div.setAttribute("class", "alert");
-  div.innerText = "추가되었습니다.";
-  alerts.prepend(div);
-  asyncAlert(div);
+  const newAlert = document.createElement("div");
+  newAlert.setAttribute("class", "alert");
+  newAlert.innerText = "추가되었습니다.";
+  alerts.append(newAlert);
+  asyncAlert(newAlert);
 };
 
 const getInputValue = () => input.value;
@@ -32,23 +33,23 @@ const deleteInputValue = () => {
   input.value = "";
 };
 
-const addToList = (item) => {
+const addToLists = (item) => {
   if (!item) {
     return;
   }
-  const div = document.createElement("div");
-  const img = document.createElement("img");
+  const newList = document.createElement("div");
 
-  div.setAttribute("class", "list");
-  img.setAttribute("class", "button btn--delete");
-  img.setAttribute("src", "bin.png");
-  img.addEventListener("click", (e) => {
-    const list = e.target.parentNode;
-    lists.removeChild(list);
+  const bin = document.createElement("i");
+
+  newList.setAttribute("class", "list");
+  bin.setAttribute("class", "button btn--delete fas fa-trash");
+  bin.addEventListener("click", (e) => {
+    const targetList = e.target.parentNode;
+    lists.removeChild(targetList);
   });
-  div.innerText = item;
-  div.appendChild(img);
-  lists.appendChild(div);
+  newList.innerText = item;
+  newList.appendChild(bin);
+  lists.appendChild(newList);
   activateAlert();
 };
 
@@ -56,13 +57,13 @@ input.addEventListener("keypress", (e) => {
   const { key } = e;
 
   if (key === "Enter") {
-    addToList(getInputValue());
+    addToLists(getInputValue());
     deleteInputValue();
     return;
   }
 });
 
 addBtn.addEventListener("click", (e) => {
-  addToList(getInputValue());
+  addToLists(getInputValue());
   deleteInputValue();
 });
