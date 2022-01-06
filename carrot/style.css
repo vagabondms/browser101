@@ -65,7 +65,7 @@ body {
   width: 1200px;
   height: 700px;
   /* etc */
-  display: relative;
+  position: relative;
   text-align: center;
   background-image: url(img/background.png);
   background-size: cover;
@@ -96,6 +96,9 @@ body {
 .button.hidden {
   display: none;
 }
+.stop.finished {
+  visibility: hidden;
+}
 
 .info__timer {
   /* spacing  */
@@ -117,6 +120,7 @@ body {
 }
 
 .info__left-overs {
+  position: relative;
   /* spacing  */
   margin: var(--margin-default) auto;
   /* justifying */
@@ -154,6 +158,9 @@ body {
   font-size: var(--font-size-large);
   /* etc */
   background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+
+  z-index: 2;
 }
 .result.hidden {
   display: none;
@@ -162,4 +169,8 @@ body {
   /* size */
   width: 15%;
   aspect-ratio: 1 / 1;
+}
+.bug,
+.carrot {
+  position: absolute;
 }
