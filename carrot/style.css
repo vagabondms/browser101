@@ -74,6 +74,10 @@ body {
   background-color: #fafafa;
 }
 
+.game__timer.hidden {
+  visibility: hidden;
+}
+
 .game__score {
   margin-top: 8px;
   /* justifying */
@@ -91,6 +95,10 @@ body {
   font-size: 2rem;
   /* etc */
   background-color: var(--color-dark-orange);
+}
+
+.game__score.hidden {
+  visibility: hidden;
 }
 
 .game__field {
@@ -118,9 +126,6 @@ body {
   transform: scale(1.1);
 }
 .button.hidden {
-  display: none;
-}
-.button.finished {
   visibility: hidden;
 }
 
