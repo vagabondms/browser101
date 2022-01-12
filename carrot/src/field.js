@@ -1,4 +1,10 @@
 import { carrotSound, bugSound } from "./sound.js";
+
+export const ITEM_TYPE = Object.freeze({
+  CARROT: "carrot",
+  BUG: "bug",
+});
+
 export default class Field {
   static randomNumber(min, max) {
     return Math.random() * (max - min) + min;
@@ -35,8 +41,8 @@ export default class Field {
   }
 
   generateTarget() {
-    this._addItem("carrot", this.carrotCount, "img/carrot.png");
-    this._addItem("bug", this.bugCount, "img/bug.png");
+    this._addItem(ITEM_TYPE.CARROT, this.carrotCount, "img/carrot.png");
+    this._addItem(ITEM_TYPE.BUG, this.bugCount, "img/bug.png");
   }
 
   resetField() {
@@ -52,13 +58,13 @@ export default class Field {
 
     if (target.matches(".carrot")) {
       carrotSound.play();
-      this.onItemClick && this.onItemClick("carrot");
+      this.onItemClick && this.onItemClick(ITEM_TYPE.CARROT);
       return;
     }
     if (target.matches(".bug")) {
       bugSound.play();
       target.remove();
-      this.onItemClick && this.onItemClick("bug");
+      this.onItemClick && this.onItemClick(ITEM_TYPE.BUG);
       return;
     }
   }

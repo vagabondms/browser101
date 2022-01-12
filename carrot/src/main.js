@@ -1,31 +1,35 @@
 "use strict";
 import Dialog from "./dialog.js";
-import Game from "./game.js";
-
-const BUG_COUNT = 5;
-const CARROT_COUNT = 5;
-const GAME_DURATION = 5;
-
+import GameBuilder, { REASON } from "./game.js";
+import { gameWinSound, alertSound } from "./sound.js";
 const gameFinishDialog = new Dialog();
 
-const game = new Game(GAME_DURATION, BUG_COUNT, CARROT_COUNT);
+const game = new GameBuilder()
+  .setGameDuration(5)
+  .setBugCount(5)
+  .setCarrotCount(5)
+  .build();
 
 gameFinishDialog.setEventListener(() => {
   game.refresh();
 });
 
 game.setFinishHandler((reason) => {
+  let message;
   switch (reason) {
-    case "win":
-      gameFinishDialog.showWithText("you win");
+    case REASON.WIN:
+      message = "you win";
+      gameWinSound.play();
       break;
-    case "lose":
-      gameFinishDialog.showWithText("you lose");
+    case REASON.LOSE:
+      message = "you lose";
       break;
-    case "cancel":
-      gameFinishDialog.showWithText("retry");
+    case REASON.CANCEL:
+      message = "you retry";
+      alertSound.play();
       break;
     default:
       throw new Error("hmmmmmm");
   }
+  gameFinishDialog.showWithText(message);
 });

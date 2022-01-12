@@ -1,7 +1,39 @@
 "use strict";
-import Field from "./field.js";
-import { gameWinSound, alertSound, bgm } from "./sound.js";
-export default class Game {
+import Field, { ITEM_TYPE } from "./field.js";
+import { bgm } from "./sound.js";
+
+export const REASON = Object.freeze({
+  WIN: "win",
+  LOSE: "lose",
+  CANCEL: "cancel",
+});
+
+export default class GameBuilder {
+  constructor() {
+    this.gameDuration;
+    this.bugCount;
+    this.carrotCount;
+  }
+  setGameDuration(duration) {
+    this.gameDuration = duration;
+    return this;
+  }
+
+  setBugCount(count) {
+    this.bugCount = count;
+    return this;
+  }
+
+  setCarrotCount(count) {
+    this.carrotCount = count;
+    return this;
+  }
+
+  build() {
+    return new Game(this.gameDuration, this.bugCount, this.carrotCount);
+  }
+}
+class Game {
   constructor(gameDuration, bugCount, carrotCount) {
     this.duration = gameDuration;
     this.bugCount = bugCount;
@@ -19,7 +51,7 @@ export default class Game {
     this.finishHandler;
     this.button.addEventListener("click", () => {
       if (this.isPlaying) {
-        this.stop("cancel");
+        this.stop(REASON.CANCEL);
       } else {
         this.start();
       }
@@ -29,17 +61,8 @@ export default class Game {
     this.isPlaying = false;
     this.stopTimer();
     this.hideBtn();
-
     bgm.stop();
     this.finishHandler && this.finishHandler(reason);
-    switch (reason) {
-      case "win":
-        gameWinSound.play();
-        return;
-      case "lose":
-        alertSound.play();
-        return;
-    }
   }
   start() {
     this.isPlaying = true;
@@ -57,14 +80,14 @@ export default class Game {
   }
   onItemClick(type) {
     switch (type) {
-      case "carrot":
-        this.stop("lose");
+      case ITEM_TYPE.CARROT:
+        this.stop(REASON.LOSE);
         return;
-      case "bug":
+      case ITEM_TYPE.BUG:
         ++this.score;
         this.updateScoreBoard(this.bugCount - this.score);
         if (this.bugCount <= this.score) {
-          this.stop("win");
+          this.stop(REASON.WIN);
         }
         return;
       default:
@@ -84,7 +107,7 @@ export default class Game {
     this.updateTimerText(time);
     this.timer = setInterval(() => {
       if (time <= 0) {
-        this.stop(this.bugCount <= this.score ? "win" : "lose");
+        this.stop(this.bugCount <= this.score ? REASON.WIN : REASON.LOSE);
         return;
       }
       this.updateTimerText(--time);
