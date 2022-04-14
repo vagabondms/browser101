@@ -7,7 +7,7 @@ export const REASON = Object.freeze({
   LOSE: "lose",
   CANCEL: "cancel",
 });
-
+console.log("hi");
 export default class GameBuilder {
   constructor() {
     this.gameDuration;
